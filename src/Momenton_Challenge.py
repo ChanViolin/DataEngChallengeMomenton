@@ -35,7 +35,7 @@ ratings_df.columns=["user_id","movie_id","rating","rating_ts"]
 del ratings_df['rating_ts']
 
 
-# In[189]:
+# In[192]:
 
 
 # Join ratings_df with movies_df based on "movie_id" to get the genre and year associated with each movie_id
@@ -44,6 +44,7 @@ del ratings_df['rating_ts']
 movie_ratings_merge_df=ratings_df.merge(movies_df, on='movie_id', how='inner')
 movie_ratings_merge_df=movie_ratings_merge_df.explode('genre').dropna()
 movie_insights_df=movie_ratings_merge_df.groupby(['genre','release_year'],as_index=False)['rating'].count()
+print(movie_insights_df.tail(20))
 
 
 # In[190]:
